@@ -22,7 +22,9 @@ async def on_message(message):
         print("Getting matches for {client}".format(client=message.author))
         args = message.content[9:]
         matches = get_matches(args)
+        reply = ""
         for line in matches:
-            await client.send_message(message.channel, line)
+            reply += line + "\n"
+        await client.send_message(message.channel, reply)
 
 client.run(secret.bot_token)
