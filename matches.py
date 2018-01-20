@@ -15,19 +15,22 @@ def get_matches(steam_id):
     matches = r.json()
     player_name = get_player(steam_id)
 
-    bot_reply = ["__{player}'s Recent Matches__".format(player=player_name)]
+    bot_reply = ["__**{player}'s Recent Matches**__".format(player=player_name)]
 
     for match in matches:
         win_loss = "Loss"
         player_team = "Dire"
         winning_team = "Dire"
+        seconds = match["duration"]%60
         if len(str(match["player_slot"])) == 1:
             player_team = "Radiant"
         if match["radiant_win"]:
             winning_team = "Radiant"
         if player_team == winning_team:
             win_loss = "Win"
-        duration = "{minutes}:{seconds}".format(minutes=match["duration"]//60, seconds=match["duration"]%60)
+        if seconds < 10:
+            seconds = "0" + str(seconds)
+        duration = "{minutes}:{seconds}".format(minutes=match["duration"]//60, seconds=seconds)
         hero = "*" + heroes[match["hero_id"]] + "*"
         bot_reply.append("<https://www.opendota.com/matches/{match_id}>\n{hero} -- {k} / {d} / {a} -- {duration} -- {win_loss}".
             format(match_id=match["match_id"], hero=hero, 
