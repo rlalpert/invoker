@@ -9,7 +9,7 @@ def get_player(steam_id):
     return player["profile"]["personaname"]
 
 def get_matches(steam_id):
-    params = {"limit": "10"}
+    params = {"limit": "5"}
     r = requests.get("https://api.opendota.com/api/players/{player_id}/matches".format(player_id=steam_id), params=params)
 
     matches = r.json()
