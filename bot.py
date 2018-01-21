@@ -3,8 +3,14 @@ import asyncio
 import secret
 import diceroller
 from matches import get_matches
+import markovify
 
 client = discord.Client()
+
+with open("markov.txt") as f:
+    text = f.read()
+
+text_model = markovify.Text(text)
 
 @client.event
 async def on_ready():
@@ -12,6 +18,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    for mention in message.mentions:
+        if mention.id == "403970167052173312":
+            # await client.add_reaction(message, "😎")
+            await client.send_message(message.channel, text_model.make_short_sentence(140))
     msg = message.content.lower()
     if msg.startswith("^roll"):
         args = message.content[6:]
@@ -26,5 +36,4 @@ async def on_message(message):
         for line in matches:
             reply += line + "\n"
         await client.send_message(message.channel, reply)
-
 client.run(secret.bot_token)
