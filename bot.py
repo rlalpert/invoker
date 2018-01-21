@@ -13,12 +13,12 @@ async def on_ready():
 @client.event
 async def on_message(message):
     msg = message.content.lower()
-    if msg.startswith("roll"):
+    if msg.startswith("^roll"):
         args = message.content[6:]
         print("Rolling {args} for {client}...".format(args=args, client=message.author))
         roll = diceroller.roll_detailed(args)
         await client.send_message(message.channel, str(roll))
-    elif msg.startswith("matches"):
+    elif msg.startswith("^matches"):
         print("Getting matches for {client}".format(client=message.author))
         args = message.content[9:]
         matches = get_matches(args)
