@@ -8,9 +8,14 @@ import markovify
 client = discord.Client()
 
 with open("markov.txt") as f:
-    text = f.read()
+    text_us = f.read()
+with open("responses.txt") as g:
+    text_invoker = g.read()
 
-text_model = markovify.Text(text)
+text_model_us = markovify.Text(text_us)
+text_model_invoker = markovify.Text(text_invoker)
+
+model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 20])
 
 @client.event
 async def on_ready():
@@ -21,7 +26,7 @@ async def on_message(message):
     for mention in message.mentions:
         if mention.id == "403970167052173312":
             # await client.add_reaction(message, "😎")
-            await client.send_message(message.channel, text_model.make_short_sentence(140))
+            await client.send_message(message.channel, model_combo.make_short_sentence(140))
     msg = message.content.lower()
     if msg.startswith("^roll"):
         args = message.content[6:]
@@ -36,4 +41,6 @@ async def on_message(message):
         for line in matches:
             reply += line + "\n"
         await client.send_message(message.channel, reply)
+    elif "bot" in msg:
+        await client.add_reaction(message, "😉")
 client.run(secret.bot_token)
