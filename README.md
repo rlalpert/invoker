@@ -11,6 +11,7 @@ Dota themed bot for my friends Discord.
   - Winner is crowned \o/
 * chatbot imitation mode
 * format rolls
+* create dictionary of reactions/trigger words
 
 # priorities
 
