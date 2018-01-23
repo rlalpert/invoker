@@ -44,8 +44,20 @@ async def on_message(message):
         await client.send_message(message.channel, reply)
     elif "bot" in msg:
         await client.add_reaction(message, "😉")
+    elif "reaction" in msg:
+        await client.add_reaction(message, "😎")
+    elif "cookie" in msg:
+        await client.add_reaction(message, "🍪")
+    elif "sexy" in msg:
+        await client.add_reaction(message, "🍆")
+    elif "drama" in msg:
+        await client.add_reaction(message, "🍿")
+    elif "coffee" in msg:
+        await client.add_reaction(message, "☕️")
+    elif "butt" in msg:
+        await client.add_reaction(message, "🍑")
     for mention in message.mentions:
         if mention.id == "403970167052173312":
             await client.send_message(message.channel, model_combo.make_short_sentence(140))
-            
+
 client.run(secret.bot_token)
