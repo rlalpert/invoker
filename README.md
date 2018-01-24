@@ -2,7 +2,7 @@
 Dota themed bot for my friends Discord.
 
 # to do
-* register match ids
+
 * get turbo games
 * Invoker practice game
   - Invoker announces spell
@@ -12,8 +12,3 @@ Dota themed bot for my friends Discord.
 * chatbot imitation mode
 * format rolls
 * create dictionary of reactions/trigger words
-
-# priorities
-
-* Quit using mentions with Markovify
-* Set up match registration

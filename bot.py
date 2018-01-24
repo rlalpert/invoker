@@ -4,6 +4,7 @@ import secret
 import diceroller
 from matches import get_matches
 import markovify
+import re
 
 client = discord.Client()
 
@@ -14,6 +15,21 @@ with open("responses.txt") as g:
 
 def discord_id_to_steam_id(message):
     return secret.identities[message.author.id]
+
+def mention_to_nick(markov_string):
+    # stop the bot from constantly @-ing people
+    mention_regex_1 = re.compile(r'<@\d+>')
+    mention_regex_2 = re.compile(r'<@!\d+>')
+    ment1 = mention_regex_1.findall(markov_string)
+    server = client.get_server("218177382606045195")
+    for mention in ment1:
+        member = server.get_member(mention[2:-1])
+        markov_string = markov_string.replace(mention, member.display_name)
+    ment2 = mention_regex_2.findall(markov_string)
+    for mention in ment2:
+        member = server.get_member(mention[3:-1])
+        markov_string = markov_string.replace(mention, member.display_name)
+    return markov_string
 
 text_model_us = markovify.Text(text_us)
 text_model_invoker = markovify.Text(text_invoker)
@@ -44,7 +60,7 @@ async def on_message(message):
         for line in matches:
             reply += line + "\n"
         await client.send_message(message.channel, reply)
-    elif "bot" in msg:
+    elif " bot " in msg:
         await client.add_reaction(message, "😉")
     elif "invoker" in msg:
         await client.add_reaction(message, "😎")
@@ -60,6 +76,7 @@ async def on_message(message):
         await client.add_reaction(message, "💪")
     for mention in message.mentions:
         if mention.id == "403970167052173312":
-            await client.send_message(message.channel, model_combo.make_short_sentence(140))
+            sentence = model_combo.make_short_sentence(140)
+            await client.send_message(message.channel, mention_to_nick(sentence))
 
 client.run(secret.bot_token)
