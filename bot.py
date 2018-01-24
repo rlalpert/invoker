@@ -12,6 +12,9 @@ with open("markov.txt") as f:
 with open("responses.txt") as g:
     text_invoker = g.read()
 
+def discord_id_to_steam_id(message):
+    return secret.identities[message.author.id]
+
 text_model_us = markovify.Text(text_us)
 text_model_invoker = markovify.Text(text_invoker)
 
@@ -20,9 +23,6 @@ model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 20])
 @client.event
 async def on_ready():
     print("Logged in as {}".format(client.user.name))
-
-# for mention in message.mentions:
-    # replace mention with mention.name
 
 @client.event
 async def on_message(message):
@@ -37,6 +37,8 @@ async def on_message(message):
     elif msg.startswith("^matches"):
         print("Getting matches for {client}".format(client=message.author))
         args = message.content[9:]
+        if args.strip() == "":
+            args = discord_id_to_steam_id(message)
         matches = get_matches(args)
         reply = ""
         for line in matches:
@@ -52,8 +54,6 @@ async def on_message(message):
         await client.add_reaction(message, "🍆")
     elif "drama" in msg:
         await client.add_reaction(message, "🍿")
-    elif "coffee" in msg:
-        await client.add_reaction(message, "☕️")
     elif "butt" in msg:
         await client.add_reaction(message, "🍑")
     elif "gym" in msg:
