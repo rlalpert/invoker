@@ -18,7 +18,7 @@ def discord_id_to_steam_id(message):
 
 def mention_to_nick(markov_string):
     # stop the bot from constantly @-ing people
-    server = client.get_server("218177382606045195")
+    server = client.get_server(secret.server_id)
     mention_regex_1 = re.compile(r'<@\d+>')
     mention_regex_2 = re.compile(r'<@!\d+>')
     ment1 = mention_regex_1.findall(markov_string)
