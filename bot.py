@@ -18,10 +18,10 @@ def discord_id_to_steam_id(message):
 
 def mention_to_nick(markov_string):
     # stop the bot from constantly @-ing people
+    server = client.get_server("218177382606045195")
     mention_regex_1 = re.compile(r'<@\d+>')
     mention_regex_2 = re.compile(r'<@!\d+>')
     ment1 = mention_regex_1.findall(markov_string)
-    server = client.get_server("218177382606045195")
     for mention in ment1:
         member = server.get_member(mention[2:-1])
         markov_string = markov_string.replace(mention, member.display_name)
@@ -62,7 +62,7 @@ async def on_message(message):
         await client.send_message(message.channel, reply)
     elif " bot " in msg:
         await client.add_reaction(message, "😉")
-    elif "invoker" in msg:
+    elif " invoker " in msg:
         await client.add_reaction(message, "😎")
     elif "cookie" in msg:
         await client.add_reaction(message, "🍪")

@@ -2,7 +2,7 @@
 Dota themed bot for my friends Discord.
 
 # to do
-
+* let you get friends matches with mentions
 * get turbo games
 * Invoker practice game
   - Invoker announces spell
