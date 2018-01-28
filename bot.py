@@ -13,11 +13,11 @@ with open("markov.txt") as f:
 with open("responses.txt") as g:
     text_invoker = g.read()
 
-def discord_id_to_steam_id(message):
+def discord_id_to_steam_id(discord_id):
     """
     Grabs 32 bit steam id based on message author's discord user id
     """
-    return secret.identities[message.author.id]
+    return secret.identities[discord_id]
 
 def mention_to_nick(markov_string):
     """
@@ -25,12 +25,12 @@ def mention_to_nick(markov_string):
     """
     server = client.get_server(secret.server_id)
     mention_regex_1 = re.compile(r'<@\d+>')
+    mention_regex_2 = re.compile(r'<@!\d+>')
     ment1 = mention_regex_1.findall(markov_string)
+    ment2 = mention_regex_2.findall(markov_string)
     for mention in ment1:
         member = server.get_member(mention[2:-1])
         markov_string = markov_string.replace(mention, member.display_name)
-    mention_regex_2 = re.compile(r'<@!\d+>')
-    ment2 = mention_regex_2.findall(markov_string)
     for mention in ment2:
         member = server.get_member(mention[3:-1])
         markov_string = markov_string.replace(mention, member.display_name)
@@ -66,7 +66,7 @@ async def on_message(message):
         print("Getting matches for {client}".format(client=message.author))
         args = message.content[9:]
         if args.strip() == "":
-            args = discord_id_to_steam_id(message)
+            args = discord_id_to_steam_id(message.author.id)
         matches = get_matches(args)
         reply = ""
         for line in matches:
