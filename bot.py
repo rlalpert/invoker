@@ -67,6 +67,8 @@ async def on_message(message):
         args = message.content[9:]
         if args.strip() == "":
             args = discord_id_to_steam_id(message.author.id)
+        elif message.raw_mentions:
+            args = discord_id_to_steam_id(message.raw_mentions[0])
         matches = get_matches(args)
         reply = ""
         for line in matches:
