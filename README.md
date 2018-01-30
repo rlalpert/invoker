@@ -2,6 +2,7 @@
 Dota themed bot for my friends Discord.
 
 # to do
+* rate how you are at dota based on your win/loss
 * get turbo games
 * Invoker practice game
   - Invoker announces spell
