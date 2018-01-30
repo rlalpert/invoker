@@ -53,6 +53,8 @@ async def on_message(message):
         return
     elif msg.startswith(cmd_key + "roll"):
         args = message.content[6:]
+        if args == "":
+            args = "1d20"
         print("Rolling {args} for {client}...".format(args=args, client=message.author))
         roll = diceroller.roll_detailed(args)
         roll["rolls"] = [str(roll) for roll in roll["rolls"]]
