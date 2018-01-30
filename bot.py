@@ -59,7 +59,9 @@ async def on_message(message):
         formatted_rolls = ', '.join(roll["rolls"])
         roll["modifiers"] = [str(mod) for mod in roll["modifiers"]]
         formatted_modifiers = ', '.join(roll["modifiers"])
-        reply = "You rolled **{total}**.\n Your rolls were {rolls}.\n Your modifers were {modifiers}".format(total=roll["total"], rolls=formatted_rolls, modifiers=formatted_modifiers)
+        reply = "Your total is **{total}**.\nYour rolls were **{rolls}**.".format(total=roll["total"], rolls=formatted_rolls)
+        if roll["modifiers"]:
+            reply += "\nYour modifiers were **{modifiers}**".format(modifiers=formatted_modifiers)
         await client.send_message(message.channel, reply)
         return
     elif msg.startswith(cmd_key + "matches"):
