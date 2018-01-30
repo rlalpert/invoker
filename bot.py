@@ -59,7 +59,9 @@ async def on_message(message):
         formatted_rolls = ', '.join(roll["rolls"])
         roll["modifiers"] = [str(mod) for mod in roll["modifiers"]]
         formatted_modifiers = ', '.join(roll["modifiers"])
-        reply = "{friendo},\nYour total is **{total}**.\nYour rolls were **{rolls}**.".format(friendo=message.author.mention, total=roll["total"], rolls=formatted_rolls)
+        reply = "{friendo},\nYour total is **{total}**.".format(friendo=message.author.mention, total=roll["total"])
+        if len(roll["rolls"]) > 1:
+            reply += "\nYour rolls were **{rolls}**.".format(rolls=formatted_rolls)
         if roll["modifiers"]:
             reply += "\nYour modifiers were **{modifiers}**".format(modifiers=formatted_modifiers)
         await client.send_message(message.channel, reply)
