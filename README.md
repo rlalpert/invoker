@@ -9,4 +9,5 @@ Dota themed bot for my friends Discord.
   - Whoever answers the fastest with its invocation gets a point
   - Game has a certain number of questions or eventually times out with no responses
   - Winner is crowned \o/
-* format rolls better
+* fetch cute pics from reddit
+* add error logging
