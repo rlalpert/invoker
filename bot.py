@@ -5,6 +5,8 @@ import diceroller
 from matches import get_matches
 import markovify
 import re
+from opinions import dota_responses
+import random
 
 client = discord.Client()
 
@@ -81,6 +83,9 @@ async def on_message(message):
             reply += line + "\n"
         await client.send_message(message.channel, reply)
         return
+    elif msg.startswith(cmd_key + "dota"):
+        reply = random.choice(dota_responses)
+        await client.send_message(message.channel, reply)
     for mention in message.mentions:
         if mention.id == "403970167052173312":
             sentence = model_combo.make_short_sentence(140)
