@@ -47,7 +47,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    cmd_key = '^'
+    cmd_key = '!'
     msg = message.content.lower()
     if message.author.bot:
         return
