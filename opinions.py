@@ -8,4 +8,4 @@ dota_responses = ["I have grown beyond Dota.",
                 "это пиздец",
                 "Иду на мид",
                 "Нам нужны варды",
-                "If you think about it, how much you lose in Dota is a reflection on how much you lose in life. That's why I always win."]
+                "If you think about it, how much you lose in Dota is a reflection of how much you lose in life. That's why I always win."]
