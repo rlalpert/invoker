@@ -57,18 +57,22 @@ async def on_message(message):
         args = message.content[6:]
         if args == "":
             args = "1d20"
-        print("Rolling {args} for {client}...".format(args=args, client=message.author))
-        roll = diceroller.roll_detailed(args)
-        roll["rolls"] = [str(roll) for roll in roll["rolls"]]
-        formatted_rolls = ', '.join(roll["rolls"])
-        roll["modifiers"] = [str(mod) for mod in roll["modifiers"]]
-        formatted_modifiers = ', '.join(roll["modifiers"])
-        reply = "{friendo},\nYour total is **{total}**.".format(friendo=message.author.mention, total=roll["total"])
-        if len(roll["rolls"]) > 1:
-            reply += "\nYour rolls were **{rolls}**.".format(rolls=formatted_rolls)
-        if roll["modifiers"]:
-            reply += "\nYour modifiers were **{modifiers}**".format(modifiers=formatted_modifiers)
-        await client.send_message(message.channel, reply)
+        try:
+            print("Rolling {args} for {client}...".format(args=args, client=message.author))
+            roll = diceroller.roll_detailed(args)
+            roll["rolls"] = [str(roll) for roll in roll["rolls"]]
+            formatted_rolls = ', '.join(roll["rolls"])
+            roll["modifiers"] = [str(mod) for mod in roll["modifiers"]]
+            formatted_modifiers = ', '.join(roll["modifiers"])
+            reply = "{friendo},\nYour total is **{total}**.".format(friendo=message.author.mention, total=roll["total"])
+            if len(roll["rolls"]) > 1:
+                reply += "\nYour rolls were **{rolls}**.".format(rolls=formatted_rolls)
+            if roll["modifiers"]:
+                reply += "\nYour modifiers were **{modifiers}**".format(modifiers=formatted_modifiers)
+            await client.send_message(message.channel, reply)
+        except:
+            reply = "**Quas Quas Wex!**"
+            await client.send_message(message.channel, reply)
         return
     elif msg.startswith(cmd_key + "matches"):
         print("Getting matches for {client}".format(client=message.author))
@@ -86,6 +90,11 @@ async def on_message(message):
     elif msg.startswith(cmd_key + "dota"):
         reply = random.choice(dota_responses)
         await client.send_message(message.channel, reply)
+        return
+    elif msg.startswith(cmd_key + "help"):
+        reply = "Come back when you have mastered the arcanery and then you *may* be worthy of my help."
+        await client.send_message(message.channel, reply)
+        return
     for mention in message.mentions:
         if mention.id == "403970167052173312":
             sentence = model_combo.make_short_sentence(140)
