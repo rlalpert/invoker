@@ -41,7 +41,7 @@ def mention_to_nick(markov_string):
 text_model_us = markovify.Text(text_us)
 text_model_invoker = markovify.Text(text_invoker)
 
-model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 20])
+model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 10])
 
 @client.event
 async def on_ready():
