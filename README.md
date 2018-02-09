@@ -11,3 +11,4 @@ Dota themed bot for my friends Discord.
   - Winner is crowned \o/
 * fetch cute pics from reddit
 * add error logging
+* get info on individual matches
