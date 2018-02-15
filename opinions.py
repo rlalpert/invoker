@@ -9,4 +9,5 @@ dota_responses = ["I have grown beyond Dota.",
                 "Иду на мид",
                 "Нам нужны варды",
                 "If you think about it, how much you lose in Dota is a reflection of how much you lose in life. That's why I always win.",
-                "**LIFE!**\nWe're playing a game where we shout out things you're bad at, right?"]
+                "**LIFE!**\nWe're playing a game where we shout out things you're bad at, right?",
+                "Me mid, you buy wards and courier. Gucci? 😎"]
