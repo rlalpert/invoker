@@ -41,7 +41,7 @@ def mention_to_nick(markov_string):
 text_model_us = markovify.Text(text_us)
 text_model_invoker = markovify.Text(text_invoker)
 
-model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 15])
+model_combo = markovify.combine([text_model_us, text_model_invoker], [1, 13])
 
 @client.event
 async def on_ready():
@@ -97,7 +97,7 @@ async def on_message(message):
         return
     for mention in message.mentions:
         if mention.id == "403970167052173312":
-            sentence = model_combo.make_short_sentence(140)
+            sentence = model_combo.make_short_sentence(280)
             await client.send_message(message.channel, mention_to_nick(sentence))
             return
     else:
