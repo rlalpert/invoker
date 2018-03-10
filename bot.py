@@ -97,7 +97,7 @@ async def on_message(message):
         return
     for mention in message.mentions:
         if mention.id == "403970167052173312":
-            sentence = model_combo.make_short_sentence(280)
+            sentence = model_combo.make_short_sentence(200)
             await client.send_message(message.channel, mention_to_nick(sentence))
             return
     else:
