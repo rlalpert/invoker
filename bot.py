@@ -95,6 +95,10 @@ async def on_message(message):
         reply = "Come back when you have mastered the arcanery and then you *may* be worthy of my help."
         await client.send_message(message.channel, reply)
         return
+    elif msg.startswith("(╯°□°）╯︵ ┻━┻"):
+        reply = "🚨 **┬─┬ ノ( ゜-゜ノ)** 🚨"
+        await client.send_message(message.channel, reply)
+        return
     for mention in message.mentions:
         if mention.id == "403970167052173312":
             sentence = model_combo.make_short_sentence(160)
