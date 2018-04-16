@@ -12,3 +12,6 @@ Dota themed bot for my friends Discord.
 * fetch cute pics from reddit
 * add error logging
 * get info on individual matches
+
+# to setup
+* [Invoke (heh)](http://www.pyinvoke.org/) - task runner (for when Invoker crashes)
