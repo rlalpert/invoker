@@ -6,6 +6,7 @@ from matches import get_matches
 import markovify
 import re
 from opinions import dota_responses
+from opinions import dota_heroes
 import random
 
 client = discord.Client()
