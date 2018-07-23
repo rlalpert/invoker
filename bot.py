@@ -93,9 +93,9 @@ async def on_message(message):
         await client.send_message(message.channel, reply)
         return
     elif msg.startswith(cmd_key + "random"):
-        author = message.author
+        author = message.author.mention
         hero = random.choice(dota_heroes)
-        reply = "{author} should play **{hero}**".format(author=author, hero=)
+        reply = "{author} should play **{hero}**".format(author=author, hero=hero)
         await client.send_message(message.channel, reply)
         return
     elif msg.startswith(cmd_key + "help"):
